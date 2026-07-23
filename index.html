@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎧 IELTS Listening Simulation • Gen. Dan Caine Testifies • Iran War Funding</title>
+  <style>
+    /* ----- RESET & GLOBAL (same style as model) ----- */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: linear-gradient(135deg, #f0f4f8 0%, #cfdfed 100%); color: #1e2a3e; line-height: 1.6; padding: 20px; min-height: 100vh; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: #1e466e; margin-bottom: 10px; font-size: 2.1rem; }
+    .description { color: #2c5282; font-size: 1rem; margin-bottom: 12px; }
+
+    /* AUDIO SECTION — smaller video */
+    .audio-section { background: #e1f0fa; padding: 18px; border-radius: 14px; margin-bottom: 20px; border: 1px solid #90cdf4; }
+    .audio-section p { font-weight: 700; margin-bottom: 12px; color: #2b6cb0; }
+    audio, video { width: 100%; max-width: 720px; max-height: 340px; border-radius: 12px; outline: none; background: #000; display: block; margin: 0 auto; }
+
+    /* IELTS Tips Panel */
+    .ielts-tips-panel { background: #fef9e6; border-left: 8px solid #e67e22; padding: 16px 20px; border-radius: 20px; margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
+    .tip-card { flex: 1; min-width: 200px; background: #ffffffcc; border-radius: 20px; padding: 12px; backdrop-filter: blur(2px); box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .tip-card h4 { color: #c4450c; margin-bottom: 8px; font-size: 1rem; border-bottom: 1px solid #ffd89a; display: inline-block; }
+    .tip-card p { font-size: 0.85rem; color: #2d3748; }
+    .badge { background: #2c7da0; color: white; border-radius: 30px; padding: 2px 10px; font-size: 0.7rem; font-weight: bold; display: inline-block; margin-bottom: 6px; }
+
+    /* TRANSCRIPT TOGGLE — bilingual layout */
+    .toggle-reading { margin: 0 auto 18px auto; display: block; background: #2c7da0; color: white; padding: 10px 24px; border-radius: 40px; cursor: pointer; border: none; font-weight: 700; width: fit-content; transition: 0.2s; }
+    .toggle-reading:hover { background: #1f5e7e; transform: scale(1.01); }
+    .reading-text { background: white; border-radius: 12px; padding: 18px; margin-bottom: 18px; border-left: 6px solid #2c7da0; display: none; max-height: 600px; overflow-y: auto; }
+    .reading-text.show { display: block; }
+    .reading-text h2 { color: #2c7da0; margin-bottom: 12px; font-size: 1.4rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+    .speaker-block { background: #f9fafc; margin: 16px 0; padding: 14px; border-radius: 14px; }
+    .eng { font-weight: 500; line-height: 1.6; color: #1f3a5f; }
+    .por { background: #eef2ff; margin-top: 10px; padding: 10px; border-radius: 12px; color: #1e466e; font-style: normal; font-size: 0.9rem; border-left: 3px solid #2c7da0; }
+    .keyword { font-weight: 700; color: #c4450c; background: #fff4e6; padding: 0 4px; border-radius: 4px; }
+
+    /* QUIZ CONTAINER */
+    .quiz-container { background: white; border-radius: 24px; box-shadow: 0 12px 28px rgba(0,0,0,0.1); overflow: hidden; margin-top: 10px; }
+    .progress-container { background: #f8fafc; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+    .progress-bar { height: 8px; background: #e2e8f0; border-radius: 5px; flex-grow: 1; margin: 0 12px; overflow: hidden; }
+    .progress { height: 100%; background: linear-gradient(90deg, #2c7da0, #48bb78); width: 0%; transition: width 0.3s; }
+    .question-count { font-weight: 700; color: #2d3748; }
+    .question-container { padding: 20px 28px; }
+    .question-text { font-weight: 800; margin-bottom: 20px; font-size: 1.2rem; color: #1e466e; background: #f0f9ff; padding: 10px 14px; border-radius: 20px; }
+    .option { margin: 12px 0; padding: 12px 16px; background: #f9f9ff; border: 2px solid #e2e8f0; border-radius: 16px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; }
+    .option:hover { background: #eef2ff; border-color: #90cdf4; transform: translateX(6px); }
+    .option input { margin-right: 14px; transform: scale(1.1); accent-color: #2c7da0; }
+    .option.correct { background: #d1fae5; border-color: #48bb78; color: #14532d; }
+    .option.incorrect { background: #ffe4e2; border-color: #fda4af; color: #991b1b; }
+    .feedback { padding: 12px 18px; border-radius: 16px; margin: 16px 0; display: none; font-weight: 500; }
+    .feedback.correct { background: #d4edda; border-left: 6px solid #2ecc71; color: #155724; }
+    .feedback.incorrect { background: #f8d7da; border-left: 6px solid #e74c3c; color: #721c24; }
+    .explanation { background: #f1f9fe; padding: 12px 18px; border-radius: 16px; margin-top: 12px; border-left: 5px solid #3498db; display: none; font-size: 0.95rem; }
+    .buttons { display: flex; justify-content: space-between; padding: 16px 28px; border-top: 1px solid #e2e8f0; }
+    button { padding: 10px 22px; background: #2c7da0; color: white; border: none; border-radius: 40px; cursor: pointer; font-weight: 700; transition: 0.15s; }
+    button:hover { background: #1e5a77; transform: translateY(-2px); }
+    button:disabled { background: #b9c8dc; cursor: not-allowed; transform: none; }
+    #restart-btn { background: #48bb78; }
+    .results { text-align: center; padding: 32px 20px; display: none; background: white; border-radius: 28px; }
+    .score { font-size: 1.8rem; margin: 20px 0; font-weight: 800; color: #1e466e; }
+    .circle-chart { width: 170px; margin: 0 auto; }
+    .circle-bg { fill: none; stroke: #e2e8f0; stroke-width: 3.8; }
+    .circle { fill: none; stroke-width: 2.8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dasharray 0.6s ease; }
+    footer { margin-top: 30px; text-align: center; color: #2c5282; font-size: 0.85rem; }
+    footer a { color: #1e466e; font-weight: 600; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (max-width: 700px) { .buttons { flex-direction: column; gap: 10px; } button { width: 100%; } .ielts-tips-panel { flex-direction: column; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🎧 IELTS Listening Simulation • Gen. Dan Caine Testifies • Iran War Funding</h1>
+    <p class="description">Listen to General Dan Caine's testimony before the Senate budget hearing. Answer 30 multiple-choice questions based on the talk.</p>
+  </header>
+
+  <!-- VIDEO SECTION -->
+  <div class="audio-section">
+    <p>🎬 <strong>LISTENING VIDEO</strong> — Chiefs of Staff Gen. Dan Caine testifies at Senate budget hearing - Iran war funding</p>
+    <video controls width="100%">
+      <source src="Chiefs of Staff Gen. Dan Caine testifies at Senate budget hearing - Iran war funding.mp4" type="video/mp4">
+      Your browser does not support the video element.
+    </video>
+    <p style="font-size:0.9rem; margin-top:6px; color:#1e466e;">🎧 IELTS tip: Listen for specific details: names, dates, amounts, and key arguments.</p>
+  </div>
+
+  <!-- TRANSCRIPT BUTTON + bilingual text -->
+  <button id="toggle-reading" class="toggle-reading" aria-expanded="false">📄 Show Full Transcript + Tradução em Português</button>
+  <div class="reading-text" id="reading-text">
+    <h2>📝 Complete Transcript + Tradução em Português</h2>
+    
+    <div class="speaker-block">
+      <div class="eng"><strong>🎤 RECORDING:</strong><br>
+      (0:00) Today to appear before you with Secretary Hegseth and Secretary Rawlins to testify on the Department (0:06) of War's Fiscal 2026 Supplemental Funding Request. And I'll note I fondly remember my time at USDA (0:13) earlier in my career where I had the chance to serve there. I'm also joined today by my (0:19) Senior Enlisted Advisor, SEAC Dave Isom.<br>
+      As always, I'm deeply grateful for this committee's (0:25) continued partnership and support for our common defense. I'd like to begin by expressing my deep (0:32) condolences and that of the Joint Chiefs of Staff and the SEAC for the fallen from this past weekend (0:40) and their families. Today we remember First Lieutenant Tyler Feehan, Sergeant Michael Swinton, (0:47) and Private Isabel Gonzalez and note that the names of our last fallen will be released when (0:53) we can.<br>
+      I'm humbled daily by the profound commitment of the incredible 2.8 million Americans, (1:00) just like these names that I've just mentioned, who make up our Joint Force and serve our nation (1:06) every day. Also, on behalf of the Joint Force and the Joint Chiefs, I want to express my sincere (1:13) and heartfelt condolences to the family of Senator Graham for their loss and all of you for the loss (1:21) of your colleague. The Joint Force remains grateful for his 44 years of service, both in and out of (1:28) uniform.<br>
+      There is no doubt he made a difference to the safety and security of our nation. (1:34) On July 22nd, 1940, General George C. Marshall said, and I quote, for almost 20 years we had all (1:44) of the time and almost none of the money. Today we have all of the money and no time. His words (1:51) resonate powerfully with me today as we find ourselves in a somewhat similar situation. (1:58) I've come to you today to request the necessary funds while in the window of opportunity, while (2:05) time is still on our side.<br>
+      The United States of America faces a global list of military challenges (2:12) in the Middle East, in Europe, in the Pacific, both nuclear and non-nuclear challenges, (2:19) and the continued threat of terrorism. We find ourselves living and leading in complex and (2:27) dynamic times. Our adversaries are aligning in their interests, creating simultaneous challenges (2:33) across multiple domains. They are sharing intelligence, combat capabilities, and technology. (2:40) Technology that is accelerating the speed of war.<br>
+      It is an imperative that Americans understand (2:49) that the character of war is changing. Advances in technology are fundamentally and irreversibly (2:57) changing the way we fight, which necessitates capital to properly arm America's military. (3:05) Rapid advancements in AI autonomous systems deliver critical technological advantages to (3:13) our national defense, and simultaneously introduce unprecedented strategic vulnerabilities (3:20) and uncertainty across the world, to include right here at home. The low barrier to entry (3:26) created by affordable, ubiquitous, unmanned systems means our adversaries, rogue actors, (3:33) state and non-state actors, and violent extremists have access to disruptive and potentially lethal (3:40) technologies at scale. We've seen this in Ukraine, and we must adopt elements of this (3:46) fight for our future fights.<br>
+      Conflict is never confined neatly to the land, sea, or air domains. (3:55) The modern battlefield stretches from the seabed up to cislunar space and beyond, (4:02) cyberspace, and in the information domain, all at the same time. Our nation must be prepared (4:09) to fight and win across all of them, all the time, all at once. In addition, the light speed (4:16) at which information travels now has compressed our leader's decision space, taking what was once (4:23) days or weeks in World War II, down to milliseconds. Your joint force must be ready, (4:29) because the United States military is America's greatest insurance policy. And I acknowledge (4:35) all of us find it difficult at times to pay for insurance before we need it, but we must have (4:42) insurance before the storm comes.<br>
+      The Armed Forces of the United States of America serves as our (4:48) nation's ultimate safeguard and our insurance policy to preserve, protect, and defend our (4:55) national interests, security, and prosperity. To uphold this responsibility, we require predictable (5:02) and consistent funding. This will allow us to partner effectively with our defense and national (5:08) industrial bases, building on acquisition reforms that guarantee our warfighters receive capabilities (5:14) at scale before they are required in conflict or combat.<br>
+      I'm struck by this season of American (5:21) history we find ourselves in, and I continue to ask myself, if not now, then when? And if not us (5:28) in this room and the rest of the Congress in the nation, then who? I acknowledge the environment (5:34) we all serve in, but always remember that we are all Americans with deep and abiding love of our (5:40) nation and our military service members and their families. I've come today to ask for your help (5:46) and your support. America's armed forces need $1.5 trillion to meet the military challenges (5:52) of the future. This supplemental is a part of that, and to be allowed to use this capital to (5:58) pay for military personnel, operations, and maintenance expenses and accelerate investments (6:04) on critical technologies, as the Secretary just mentioned. It is critical that we stay ahead of (6:09) our adversaries, and we must have the funds before we're out of time.<br>
+      In closing, I ask all of us to (6:15) remember our deployed service members around the world right now, especially our Army teammates (6:21) who remain deployed after losing their friends and teammates this past weekend. And I again ask (6:28) all of us here in the Senate and across the American people to never forget our fallen and (6:33) their families who continue to show us what courage, tenacity, grit, and commitment to (6:40) the nation looks like. Thank you very much, and I look forward to answering your questions.
+      </div>
+      <div class="por"><strong>🇧🇷 Português:</strong><br>
+      <strong>GRAVAÇÃO:</strong><br>
+      (0:00) Hoje, para comparecer perante vocês com o Secretário Hegseth e o Secretário Rawlins para testemunhar sobre o Pedido de Financiamento Suplementar do Ano Fiscal de 2026 do Departamento de Guerra. E observo que me lembro com carinho do meu tempo no USDA (0:13) no início da minha carreira, onde tive a chance de servir. Também estou acompanhado hoje pelo meu (0:19) Conselheiro Sênior Alistado, SEAC Dave Isom.<br>
+      Como sempre, sou profundamente grato pela parceria contínua deste comitê e pelo apoio à nossa defesa comum. Gostaria de começar expressando minhas profundas (0:32) condolências e as do Estado-Maior Conjunto e do SEAC pelos caídos do fim de semana passado (0:40) e suas famílias. Hoje lembramos o Primeiro Tenente Tyler Feehan, o Sargento Michael Swinton, (0:47) e a Soldado Isabel Gonzalez e observamos que os nomes de nossos últimos caídos serão divulgados quando (0:53) pudermos.<br>
+      Sou humilhado diariamente pelo compromisso profundo dos incríveis 2,8 milhões de americanos, (1:00) como esses nomes que acabei de mencionar, que compõem nossa Força Conjunta e servem nossa nação (1:06) todos os dias. Também, em nome da Força Conjunta e dos Chefes do Estado-Maior, quero expressar minhas sinceras (1:13) e sentidas condolências à família do Senador Graham por sua perda e a todos vocês pela perda (1:21) de seu colega. A Força Conjunta permanece grata por seus 44 anos de serviço, tanto fardado quanto (1:28) civil.<br>
+      Não há dúvida de que ele fez a diferença para a segurança e proteção de nossa nação. (1:34) Em 22 de julho de 1940, o General George C. Marshall disse, e cito: "por quase 20 anos tivemos todo (1:44) o tempo e quase nenhum dinheiro. Hoje temos todo o dinheiro e nenhum tempo". Suas palavras (1:51) ressoam poderosamente em mim hoje, pois nos encontramos em uma situação um tanto semelhante. (1:58) Vim hoje para solicitar os fundos necessários enquanto estamos na janela de oportunidade, enquanto (2:05) o tempo ainda está ao nosso lado.<br>
+      Os Estados Unidos da América enfrentam uma lista global de desafios militares (2:12) no Oriente Médio, na Europa, no Pacífico, tanto desafios nucleares quanto não nucleares, (2:19) e a ameaça contínua do terrorismo. Nos encontramos vivendo e liderando em tempos complexos e (2:27) dinâmicos. Nossos adversários estão alinhando seus interesses, criando desafios simultâneos (2:33) em múltiplos domínios. Eles estão compartilhando inteligência, capacidades de combate e tecnologia. (2:40) Tecnologia que está acelerando a velocidade da guerra.<br>
+      É imperativo que os americanos entendam (2:49) que o caráter da guerra está mudando. Os avanços na tecnologia estão mudando fundamental e irreversivelmente (2:57) a maneira como lutamos, o que exige capital para armar adequadamente os militares americanos. (3:05) Avanços rápidos em sistemas autônomos de IA proporcionam vantagens tecnológicas críticas para (3:13) nossa defesa nacional e, simultaneamente, introduzem vulnerabilidades estratégicas sem precedentes (3:20) e incertezas em todo o mundo, inclusive aqui em casa. A baixa barreira de entrada (3:26) criada por sistemas não tripulados acessíveis e onipresentes significa que nossos adversários, atores rebeldes, (3:33) atores estatais e não estatais, e extremistas violentos têm acesso a tecnologias disruptivas e potencialmente letais (3:40) em escala. Vimos isso na Ucrânia, e devemos adotar elementos dessa (3:46) luta para nossas futuras batalhas.<br>
+      O conflito nunca está confinado apenas aos domínios terrestre, marítimo ou aéreo. (3:55) O campo de batalha moderno se estende do fundo do mar ao espaço cislunar e além, (4:02) ao ciberespaço e ao domínio da informação, tudo ao mesmo tempo. Nossa nação deve estar preparada (4:09) para lutar e vencer em todos eles, o tempo todo, todos de uma vez. Além disso, a velocidade da luz (4:16) com que a informação viaja agora comprimiu o espaço de decisão de nossos líderes, transformando o que antes era (4:23) dias ou semanas na Segunda Guerra Mundial, em milissegundos. Sua força conjunta deve estar pronta, (4:29) porque os militares dos Estados Unidos são a maior apólice de seguro da América. E reconheço (4:35) que todos nós achamos difícil às vezes pagar pelo seguro antes de precisarmos, mas devemos ter (4:42) seguro antes que a tempestade chegue.<br>
+      As Forças Armadas dos Estados Unidos da América servem como nossa (4:48) salvaguarda máxima e nossa apólice de seguro para preservar, proteger e defender nossos (4:55) interesses nacionais, segurança e prosperidade. Para cumprir essa responsabilidade, exigimos financiamento previsível (5:02) e consistente. Isso nos permitirá fazer parcerias eficazes com nossas bases industriais de defesa e nacionais, (5:08) construindo sobre reformas de aquisição que garantam que nossos combatentes recebam capacidades (5:14) em escala antes de serem necessárias em conflito ou combate.<br>
+      Estou impressionado com esta época da história americana (5:21) em que nos encontramos, e continuo me perguntando: se não agora, então quando? E se não nós (5:28) nesta sala e o resto do Congresso e da nação, então quem? Reconheço o ambiente (5:34) em que todos servimos, mas lembre-se sempre de que somos todos americanos com amor profundo e duradouro por nossa (5:40) nação e por nossos militares e suas famílias. Vim hoje pedir sua ajuda (5:46) e seu apoio. As forças armadas americanas precisam de US$ 1,5 trilhão para enfrentar os desafios militares (5:52) do futuro. Este suplementar é parte disso, e para ter permissão para usar esse capital para (5:58) pagar despesas de pessoal militar, operações e manutenção e acelerar investimentos (6:04) em tecnologias críticas, como o Secretário acabou de mencionar. É fundamental que fiquemos à frente (6:09) de nossos adversários, e devemos ter os fundos antes que fiquemos sem tempo.<br>
+      Para concluir, peço a todos nós que (6:15) lembremos de nossos militares destacados em todo o mundo agora, especialmente nossos colegas do Exército (6:21) que permanecem destacados após perderem seus amigos e companheiros no fim de semana passado. E peço novamente (6:28) a todos nós aqui no Senado e em todo o povo americano que nunca esqueçam nossos caídos e (6:33) suas famílias, que continuam nos mostrando o que é coragem, tenacidade, determinação e compromisso (6:40) com a nação. Muito obrigado, e aguardo suas perguntas.
+      </div>
+    </div>
+    <p style="margin-top:12px;">🎧 IELTS tip: Listen for specific details: names, dates, amounts, and key arguments.</p>
+  </div>
+
+  <!-- QUIZ CONTAINER 30 questions -->
+  <div class="quiz-container">
+    <div class="progress-container">
+      <div class="question-count">Question <span id="current">1</span> of <span id="total">30</span></div>
+      <div class="progress-bar" aria-hidden="true"><div class="progress" id="progress"></div></div>
+    </div>
+    <div class="question-container">
+      <div class="question-text" id="question"></div>
+      <div class="options-container" id="options"></div>
+      <div class="feedback" id="feedback" role="status"></div>
+      <div class="explanation" id="explanation"></div>
+    </div>
+    <div class="buttons">
+      <button id="prev-btn" disabled>◀ Previous</button>
+      <button id="next-btn">Next ▶</button>
+    </div>
+    <div class="results" id="results">
+      <h2>🎯 IELTS Listening Practice Completed!</h2>
+      <svg class="circle-chart" viewBox="0 0 36 36" width="170" height="170">
+        <circle class="circle-bg" cx="18" cy="18" r="16"></circle>
+        <circle class="circle" cx="18" cy="18" r="16" stroke="#2c7da0" stroke-dasharray="0,100"></circle>
+        <g class="circle-chart-text"><text x="18" y="20.5" text-anchor="middle" font-size="8" fill="#2c7da0">0%</text></g>
+      </svg>
+      <div class="score" id="final-score">Score: 0/30</div>
+      <button id="restart-btn">⟳ Restart Practice</button>
+    </div>
+  </div>
+
+  <footer>
+    Inglês Profissional • Preparação para Exames • Cambridge • IELTS • TOEFL • Duolingo English Test (DET)<br>
+    <span class="copyright">© English VClass • Edson D'Aguiar</span>
+    • WhatsApp ➡️<a href="https://wa.me/5541991725009" target="_blank">• VClass English •</a>
+  </footer>
+</div>
+
+<script>
+  // 30 QUESTIONS based on the transcript
+  const quizData = [
+    { q: "1. Who is testifying before the Senate committee?", opts: ["A - Secretary Hegseth", "B - General Dan Caine", "C - Secretary Rawlins"], ans: "B", exp: "Transcript: 'Chiefs of Staff Gen. Dan Caine testifies at Senate budget hearing' / Transcrição: 'Gen. Dan Caine testemunha na audiência orçamentária do Senado'" },
+    { q: "2. What is the subject of the testimony?", opts: ["A - Department of War's Fiscal 2026 Supplemental Funding Request", "B - Military strategy in the Middle East", "C - Veterans affairs"], ans: "A", exp: "Transcript: 'testify on the Department of War's Fiscal 2026 Supplemental Funding Request.' / Transcrição: 'testemunhar sobre o Pedido de Financiamento Suplementar do Ano Fiscal de 2026 do Departamento de Guerra.'" },
+    { q: "3. Who is the Senior Enlisted Advisor mentioned?", opts: ["A - Dave Isom", "B - Tyler Feehan", "C - Michael Swinton"], ans: "A", exp: "Transcript: 'my Senior Enlisted Advisor, SEAC Dave Isom.' / Transcrição: 'meu Conselheiro Sênior Alistado, SEAC Dave Isom.'" },
+    { q: "4. What does Gen. Caine express condolences for?", opts: ["A - The fallen from the past weekend", "B - The loss of Senator Graham", "C - Both A and B"], ans: "C", exp: "Transcript: 'condolences for the fallen from this past weekend ... condolences to the family of Senator Graham.' / Transcrição: 'condolências pelos caídos do fim de semana passado ... condolências à família do Senador Graham.'" },
+    { q: "5. How many Americans make up the Joint Force according to Gen. Caine?", opts: ["A - 1.5 million", "B - 2.8 million", "C - 3.2 million"], ans: "B", exp: "Transcript: 'the incredible 2.8 million Americans, who make up our Joint Force.' / Transcrição: 'os incríveis 2,8 milhões de americanos, que compõem nossa Força Conjunta.'" },
+    { q: "6. How many years of service did Senator Graham have?", opts: ["A - 30 years", "B - 44 years", "C - 50 years"], ans: "B", exp: "Transcript: 'grateful for his 44 years of service.' / Transcrição: 'grata por seus 44 anos de serviço.'" },
+    { q: "7. What date did Gen. Marshall make his famous quote?", opts: ["A - July 22, 1940", "B - July 22, 1941", "C - July 22, 1945"], ans: "A", exp: "Transcript: 'On July 22nd, 1940, General George C. Marshall said.' / Transcrição: 'Em 22 de julho de 1940, o General George C. Marshall disse.'" },
+    { q: "8. What did Gen. Marshall say about time and money?", opts: ["A - We had all the money and no time", "B - We had all the time and no money", "C - We had both time and money"], ans: "B", exp: "Transcript: 'for almost 20 years we had all of the time and almost none of the money.' / Transcrição: 'por quase 20 anos tivemos todo o tempo e quase nenhum dinheiro.'" },
+    { q: "9. What does Gen. Caine say about the current situation?", opts: ["A - We have all the money and no time", "B - We have all the time and no money", "C - We have neither time nor money"], ans: "A", exp: "Transcript: 'Today we have all of the money and no time. His words resonate powerfully with me today as we find ourselves in a somewhat similar situation.' / Transcrição: 'Hoje temos todo o dinheiro e nenhum tempo. Suas palavras ressoam poderosamente em mim hoje, pois nos encontramos em uma situação um tanto semelhante.'" },
+    { q: "10. Where does the US face military challenges?", opts: ["A - Middle East, Europe, Pacific", "B - Middle East and Asia", "C - Europe and Africa"], ans: "A", exp: "Transcript: 'faces a global list of military challenges in the Middle East, in Europe, in the Pacific.' / Transcrição: 'enfrenta uma lista global de desafios militares no Oriente Médio, na Europa, no Pacífico.'" },
+    { q: "11. What are adversaries sharing according to Gen. Caine?", opts: ["A - Intelligence, combat capabilities, and technology", "B - Weapons and troops", "C - Diplomatic positions"], ans: "A", exp: "Transcript: 'They are sharing intelligence, combat capabilities, and technology.' / Transcrição: 'Eles estão compartilhando inteligência, capacidades de combate e tecnologia.'" },
+    { q: "12. What is accelerating the speed of war?", opts: ["A - Technology", "B - Troop movements", "C - Political decisions"], ans: "A", exp: "Transcript: 'Technology that is accelerating the speed of war.' / Transcrição: 'Tecnologia que está acelerando a velocidade da guerra.'" },
+    { q: "13. What is changing the character of war?", opts: ["A - Advances in technology", "B - New alliances", "C - Economic factors"], ans: "A", exp: "Transcript: 'the character of war is changing. Advances in technology are fundamentally and irreversibly changing the way we fight.' / Transcrição: 'o caráter da guerra está mudando. Os avanços na tecnologia estão mudando fundamental e irreversivelmente a maneira como lutamos.'" },
+    { q: "14. What do rapid advancements in AI autonomous systems deliver?", opts: ["A - Critical technological advantages", "B - Strategic vulnerabilities", "C - Both A and B"], ans: "C", exp: "Transcript: 'Rapid advancements in AI autonomous systems deliver critical technological advantages to our national defense, and simultaneously introduce unprecedented strategic vulnerabilities.' / Transcrição: 'Avanços rápidos em sistemas autônomos de IA proporcionam vantagens tecnológicas críticas para nossa defesa nacional e, simultaneamente, introduzem vulnerabilidades estratégicas sem precedentes.'" },
+    { q: "15. What creates the low barrier to entry for adversaries?", opts: ["A - Affordable, ubiquitous, unmanned systems", "B - Cheap weapons", "C - Cyber attacks"], ans: "A", exp: "Transcript: 'The low barrier to entry created by affordable, ubiquitous, unmanned systems.' / Transcrição: 'A baixa barreira de entrada criada por sistemas não tripulados acessíveis e onipresentes.'" },
+    { q: "16. Where have we seen this type of warfare?", opts: ["A - Ukraine", "B - Iraq", "C - Afghanistan"], ans: "A", exp: "Transcript: 'We've seen this in Ukraine.' / Transcrição: 'Vimos isso na Ucrânia.'" },
+    { q: "17. How does Gen. Caine describe the modern battlefield?", opts: ["A - Stretches from seabed to cislunar space", "B - Limited to land and air", "C - Only in cyberspace"], ans: "A", exp: "Transcript: 'The modern battlefield stretches from the seabed up to cislunar space and beyond, cyberspace, and in the information domain.' / Transcrição: 'O campo de batalha moderno se estende do fundo do mar ao espaço cislunar e além, ao ciberespaço e ao domínio da informação.'" },
+    { q: "18. What has compressed leaders' decision space?", opts: ["A - The speed of light at which information travels", "B - Faster weapons", "C - Political pressure"], ans: "A", exp: "Transcript: 'the light speed at which information travels now has compressed our leader's decision space.' / Transcrição: 'a velocidade da luz com que a informação viaja agora comprimiu o espaço de decisão de nossos líderes.'" },
+    { q: "19. What was the decision space in World War II compared to now?", opts: ["A - Days or weeks, now milliseconds", "B - Hours, now seconds", "C - Months, now minutes"], ans: "A", exp: "Transcript: 'taking what was once days or weeks in World War II, down to milliseconds.' / Transcrição: 'transformando o que antes era dias ou semanas na Segunda Guerra Mundial, em milissegundos.'" },
+    { q: "20. What does Gen. Caine call America's greatest insurance policy?", opts: ["A - The United States military", "B - The economy", "C - Diplomacy"], ans: "A", exp: "Transcript: 'the United States military is America's greatest insurance policy.' / Transcrição: 'os militares dos Estados Unidos são a maior apólice de seguro da América.'" },
+    { q: "21. When should we have insurance according to Gen. Caine?", opts: ["A - Before the storm comes", "B - After the storm starts", "C - Only when needed"], ans: "A", exp: "Transcript: 'we must have insurance before the storm comes.' / Transcrição: 'devemos ter seguro antes que a tempestade chegue.'" },
+    { q: "22. What does the Armed Forces serve as?", opts: ["A - The nation's ultimate safeguard", "B - A political tool", "C - An economic driver"], ans: "A", exp: "Transcript: 'The Armed Forces of the United States of America serves as our nation's ultimate safeguard.' / Transcrição: 'As Forças Armadas dos Estados Unidos da América servem como nossa salvaguarda máxima.'" },
+    { q: "23. What type of funding does Gen. Caine request?", opts: ["A - Predictable and consistent funding", "B - One-time emergency funding", "C - Short-term funding"], ans: "A", exp: "Transcript: 'we require predictable and consistent funding.' / Transcrição: 'exigimos financiamento previsível e consistente.'" },
+    { q: "24. What does Gen. Caine ask himself about this season of American history?", opts: ["A - If not now, then when? If not us, then who?", "B - How did we get here?", "C - What will the future bring?"], ans: "A", exp: "Transcript: 'if not now, then when? And if not us in this room and the rest of the Congress in the nation, then who?' / Transcrição: 'se não agora, então quando? E se não nós nesta sala e o resto do Congresso e da nação, então quem?'" },
+    { q: "25. How much does America's armed forces need for the future?", opts: ["A - $1.5 trillion", "B - $2.0 trillion", "C - $1.0 trillion"], ans: "A", exp: "Transcript: 'America's armed forces need $1.5 trillion to meet the military challenges of the future.' / Transcrição: 'as forças armadas americanas precisam de US$ 1,5 trilhão para enfrentar os desafios militares do futuro.'" },
+    { q: "26. What will the supplemental funding pay for?", opts: ["A - Military personnel, operations, maintenance, and critical technologies", "B - Only new weapons", "C - Only personnel costs"], ans: "A", exp: "Transcript: 'to pay for military personnel, operations, and maintenance expenses and accelerate investments on critical technologies.' / Transcrição: 'para pagar despesas de pessoal militar, operações e manutenção e acelerar investimentos em tecnologias críticas.'" },
+    { q: "27. Why must we have the funds before we're out of time?", opts: ["A - To stay ahead of our adversaries", "B - To meet budget deadlines", "C - To avoid inflation"], ans: "A", exp: "Transcript: 'It is critical that we stay ahead of our adversaries, and we must have the funds before we're out of time.' / Transcrição: 'É fundamental que fiquemos à frente de nossos adversários, e devemos ter os fundos antes que fiquemos sem tempo.'" },
+    { q: "28. What does Gen. Caine ask everyone to remember in closing?", opts: ["A - Deployed service members and the fallen", "B - The budget numbers", "C - The political process"], ans: "A", exp: "Transcript: 'remember our deployed service members around the world right now ... never forget our fallen and their families.' / Transcrição: 'lembremos de nossos militares destacados em todo o mundo agora ... nunca esqueçam nossos caídos e suas famílias.'" },
+    { q: "29. Which service members does Gen. Caine specifically mention as deployed?", opts: ["A - Army teammates", "B - Navy sailors", "C - Air Force pilots"], ans: "A", exp: "Transcript: 'especially our Army teammates who remain deployed after losing their friends and teammates this past weekend.' / Transcrição: 'especialmente nossos colegas do Exército que permanecem destacados após perderem seus amigos e companheiros no fim de semana passado.'" },
+    { q: "30. What qualities do the fallen and their families show according to Gen. Caine?", opts: ["A - Courage, tenacity, grit, and commitment", "B - Strength and resilience", "C - Patriotism and duty"], ans: "A", exp: "Transcript: 'who continue to show us what courage, tenacity, grit, and commitment to the nation looks like.' / Transcrição: 'que continuam nos mostrando o que é coragem, tenacidade, determinação e compromisso com a nação.'" }
+  ];
+
+  // DOM elements
+  const questionEl = document.getElementById('question');
+  const optionsEl = document.getElementById('options');
+  const feedbackEl = document.getElementById('feedback');
+  const explanationEl = document.getElementById('explanation');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const restartBtn = document.getElementById('restart-btn');
+  const resultsDiv = document.getElementById('results');
+  const progressFill = document.getElementById('progress');
+  const currentSpan = document.getElementById('current');
+  const totalSpan = document.getElementById('total');
+  const finalScoreSpan = document.getElementById('final-score');
+  const circleSvg = document.querySelector('.circle');
+  const circleText = document.querySelector('.circle-chart-text text');
+  const readingDiv = document.getElementById('reading-text');
+  const toggleReadingBtn = document.getElementById('toggle-reading');
+
+  let currentQuestion = 0, score = 0;
+  let userAnswers = new Array(quizData.length).fill(null);
+
+  function updateProgressBar() { progressFill.style.width = `${((currentQuestion+1)/quizData.length)*100}%`; }
+  function showFeedbackForCurrent() {
+    const selected = userAnswers[currentQuestion];
+    if (!selected) return;
+    const isCorrect = (selected === quizData[currentQuestion].ans);
+    feedbackEl.textContent = isCorrect ? '✓ Correct! Good listening.' : '✗ Not quite. Listen again or check the transcript.';
+    feedbackEl.className = isCorrect ? 'feedback correct' : 'feedback incorrect';
+    feedbackEl.style.display = 'block';
+    explanationEl.innerHTML = `<strong>📌 Explanation / Explicação:</strong><br> ${quizData[currentQuestion].exp}`;
+    explanationEl.style.display = 'block';
+  }
+
+  function renderQuestion() {
+    const q = quizData[currentQuestion];
+    currentSpan.textContent = currentQuestion+1;
+    questionEl.textContent = q.q;
+    optionsEl.innerHTML = '';
+    const saved = userAnswers[currentQuestion];
+    q.opts.forEach((opt, idx) => {
+      const optLetter = opt.charAt(0);
+      const div = document.createElement('div'); div.className = 'option';
+      if (saved !== null) { if (optLetter === q.ans) div.classList.add('correct'); else if (optLetter === saved && saved !== q.ans) div.classList.add('incorrect'); }
+      const radio = document.createElement('input'); radio.type = 'radio'; radio.name = 'answer'; radio.value = optLetter; radio.id = `opt_${currentQuestion}_${idx}`;
+      if (saved !== null) radio.disabled = true; if (saved === optLetter) radio.checked = true;
+      const label = document.createElement('label'); label.htmlFor = radio.id; label.textContent = ` ${opt}`;
+      div.appendChild(radio); div.appendChild(label);
+      if (saved === null) radio.addEventListener('change', (e) => { if(e.target.checked){ userAnswers[currentQuestion] = optLetter; if(optLetter === q.ans) score++; renderQuestion(); updateNavButtons(); } });
+      optionsEl.appendChild(div);
+    });
+    if (saved !== null) showFeedbackForCurrent(); else { feedbackEl.style.display = 'none'; explanationEl.style.display = 'none'; }
+    updateNavButtons(); updateProgressBar();
+  }
+
+  function updateNavButtons() {
+    prevBtn.disabled = (currentQuestion === 0);
+    const isAnswered = (userAnswers[currentQuestion] !== null);
+    if (currentQuestion === quizData.length-1) {
+      nextBtn.textContent = 'Finish';
+      if (isAnswered) { nextBtn.removeEventListener('click', finishQuiz); nextBtn.addEventListener('click', finishQuiz, { once: true }); }
+      else nextBtn.removeEventListener('click', finishQuiz);
+    } else { nextBtn.textContent = 'Next'; nextBtn.removeEventListener('click', finishQuiz); }
+    nextBtn.disabled = !isAnswered;
+  }
+
+  function showNext() { if (currentQuestion < quizData.length-1) { currentQuestion++; renderQuestion(); } }
+  function showPrev() { if (currentQuestion > 0) { currentQuestion--; renderQuestion(); } }
+  function finishQuiz() {
+    document.querySelector('.question-container').style.display = 'none';
+    document.querySelector('.buttons').style.display = 'none';
+    resultsDiv.style.display = 'block';
+    const percent = (score/quizData.length)*100;
+    finalScoreSpan.textContent = `Score: ${score}/${quizData.length}`;
+    circleSvg?.setAttribute('stroke-dasharray', `${percent}, 100`);
+    if(circleText) circleText.textContent = `${Math.round(percent)}%`;
+    if(percent<50) circleSvg?.setAttribute('stroke','#e74c3c');
+    else if(percent<80) circleSvg?.setAttribute('stroke','#f39c12');
+    else circleSvg?.setAttribute('stroke','#2ecc71');
+  }
+  function restartQuiz() {
+    currentQuestion = 0; score = 0; userAnswers.fill(null);
+    document.querySelector('.question-container').style.display = 'block';
+    document.querySelector('.buttons').style.display = 'flex';
+    resultsDiv.style.display = 'none';
+    nextBtn.removeEventListener('click', finishQuiz);
+    renderQuestion();
+  }
+
+  prevBtn.addEventListener('click', showPrev);
+  nextBtn.addEventListener('click', () => { if(currentQuestion === quizData.length-1 && userAnswers[currentQuestion] !== null) finishQuiz(); else showNext(); });
+  restartBtn.addEventListener('click', restartQuiz);
+  toggleReadingBtn.addEventListener('click', () => { readingDiv.classList.toggle('show'); toggleReadingBtn.textContent = readingDiv.classList.contains('show') ? '📖 Hide Transcript + Tradução' : '📄 Show Full Transcript + Tradução em Português'; });
+  totalSpan.textContent = quizData.length;
+  renderQuestion();
+  readingDiv.classList.remove('show');
+</script>
+</body>
+</html>
